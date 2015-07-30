@@ -1,65 +1,13 @@
+{% extends "base.html" %}
+
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>LGBT Statistics 2014</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{% static 'css/material.css' %}">
-    <link rel="stylesheet" href="{% static 'index/index.css' %}">
-  </head>
-  <body>
-    <!-- Uses a header that contracts as the page scrolls down. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
-      <header class="pride-nav mdl-layout__header mdl-layout__header--waterfall">
-        <!-- Top row, always visible -->
-        <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">Worldwide LGBT Rights Statistics</span>
-          <div class="mdl-layout-spacer"></div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                      mdl-textfield--floating-label mdl-textfield--align-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon"
-                   for="waterfall-exp">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" name="sample"
-                     placeholder="search countries" id="waterfall-exp" />
-            </div>
-          </div>
-        </div>
-        <!-- Bottom row, not visible on scroll -->
-        <div class="mdl-layout__header-row">
-          <div class="mdl-layout-spacer"></div>
-          <!-- Navigation -->
-          <nav class="waterfall-demo-header-nav mdl-navigation">
-            <a class="mdl-navigation__link" href={% url "topic" 'has_death_penalty' %}>Dealth Penalty</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'is_illegal' %}>Legal Issues</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'has_employment_protection' %}>Employment Discrimination</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'has_hate_crime_protection' %}>Hate crimes</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'has_marriage_recognition' %}>Marriage Recognition</a>
-          </nav>
-        </div>
-      </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Countries</span>
-        <nav class="mdl-navigation">
-          {% if countries %}
-            {% for country in countries %}
-              <a class="mdl-navigation__link" href={% url "country" country.country_name %}>{{ country.country_name }}</a>
-            {% endfor %}
-          {% else %}
-            <a class="mdl-navigation__link" href="">No countries found</a>
-          {% endif %}
-        </nav>
-      </div>
-      <main class="mdl-layout__content">
-        <div class="page-content">
-          <iframe width=500 height=515 src="https://www.youtube.com/embed/WSiehK2asbI" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </main>
-    </div>
-    <script src="{% static 'js/material.js' %}"></script>
-  </body>
-</html>
+
+{% block title %}LGBT Statistics 2014{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'index/index.css' %}">
+{% endblock %}
+
+{% block content %}
+  <iframe width=500 height=515 src="https://www.youtube.com/embed/WSiehK2asbI" frameborder="0" allowfullscreen></iframe>
+{% endblock %}

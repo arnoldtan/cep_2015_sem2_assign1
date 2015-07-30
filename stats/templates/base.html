@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'css/material.css' %}">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% block stylesheets %}{% endblock %}
+  </head>
+  <body>
+    <!-- Uses a header that contracts as the page scrolls down. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
+      <header class="pride-nav mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">
+            <a href="/">Worldwide LGBT Rights Statistics</a>
+          </span>
+          <div class="mdl-layout-spacer"></div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                      mdl-textfield--floating-label mdl-textfield--align-right">
+            <label class="mdl-button mdl-js-button mdl-button--icon"
+                   for="waterfall-exp">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" name="sample"
+                     placeholder="search countries" id="waterfall-exp" />
+            </div>
+          </div>
+        </div>
+        <!-- Bottom row, not visible on scroll -->
+        <div class="mdl-layout__header-row">
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation -->
+          <nav class="waterfall-demo-header-nav mdl-navigation">
+            <a class="mdl-navigation__link" href={% url "topic" 'has_death_penalty' %}>Dealth Penalty</a>
+            <a class="mdl-navigation__link" href={% url "topic" 'is_illegal' %}>Legal Issues</a>
+            <a class="mdl-navigation__link" href={% url "topic" 'has_employment_protection' %}>Employment Discrimination</a>
+            <a class="mdl-navigation__link" href={% url "topic" 'has_hate_crime_protection' %}>Hate crimes</a>
+            <a class="mdl-navigation__link" href={% url "topic" 'has_marriage_recognition' %}>Marriage Recognition</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <div class="nav-header-wrapper">
+          <span id="sidebar-heading" class="mdl-layout-title"><a href="/country/all/">Countries</a></span>
+          <a href="/country/add/">
+            <button id="add-button" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored">
+              <i class="material-icons">add</i>
+            </button>
+          </a>
+        </div>
+        <nav id="nav-country-list" class="mdl-navigation">
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+            {% block content %}{% endblock %}
+        </div>
+      </main>
+    </div>
+    <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'js/material.js' %}"></script>
+    <script src="{% static 'base.js' %}"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

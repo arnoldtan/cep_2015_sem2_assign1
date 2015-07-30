@@ -1,0 +1,7 @@
+#country_list_table {
+    margin: 50px auto auto auto;
+}
+
+#country_list_table th {
+    text-align: right;
+}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Country List{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'country/country_list.css' %}"
+{% endblock %}
+
+{% block content %}
+    {% if object_list %}
+      <table id="country_list_table" class="mdl-data-table mdl-js-data-table">
+        <thead>
+          <tr>
+            <th>
+              Country Name
+            </th>
+            <th>
+              Death Penalty for homosexual acts
+            </th>
+            <th>
+              Homosexual acts are illegal
+            </th>
+            <th>
+              Has protection against discrimination in
+              <br>employment based on sexual orientation
+            </th>
+            <th>
+              Has protection against hate
+              <br>crime based on sexual orientation
+            </th>
+            <th>
+              Marriage open for same sex couples
+            </th>
+            <th>
+              Edit
+            </th>
+            <th>
+              Delete
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for country in object_list %}
+            <tr>
+              <td>{{ country.country_name }}</td>
+              <td>{{ country.has_death_penalty }}</td>
+              <td>{{ country.is_illegal }}</td>
+              <td>{{ country.has_employment_protection }}</td>
+              <td>{{ country.has_hate_crime_protection }}</td>
+              <td>{{ country.has_marriage_recognition }}</td>
+              <td>
+                <a href="/country/edit/{{ country.pk }}">
+                  <div id="e{{ country.pk }}" class="icon material-icons">border_color</div>
+                </a>
+                <div class="mdl-tooltip" for="e{{ country.pk }}">Edit</div>
+              </td>
+              <td>
+                <a href="/country/delete/{{ country.pk }}">
+                  <div id="d{{ country.pk }}" class="icon material-icons">clear</div>
+                </a>
+                <div class="mdl-tooltip" for="d{{ country.pk }}">Delete</div>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <h3>No Countries are available</h3>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+  <script src="{% static 'country/country_list.js' %}"></script>
+{% endblock %}

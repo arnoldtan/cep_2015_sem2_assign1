@@ -1,115 +1,62 @@
+{% extends "base.html" %}
+
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>{{ country.country_name }}</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{% static 'css/material.css' %}">
-    <link rel="stylesheet" href="{% static 'index/index.css' %}">
-    <link rel="stylesheet" href="{% static 'country/country.css' %}">
-  </head>
-  <body>
-    <!-- Uses a header that contracts as the page scrolls down. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--overlay-drawer-button">
-      <header class="pride-nav mdl-layout__header mdl-layout__header--waterfall">
-        <!-- Top row, always visible -->
-        <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">Worldwide LGBT Rights Statistics</span>
-          <div class="mdl-layout-spacer"></div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                      mdl-textfield--floating-label mdl-textfield--align-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon"
-                   for="waterfall-exp">
-              <i class="material-icons">search</i>
-            </label>
-            <div class="mdl-textfield__expandable-holder">
-              <input class="mdl-textfield__input" type="text" name="sample"
-                     placeholder="search countries" id="waterfall-exp" />
-            </div>
-          </div>
-        </div>
-        <!-- Bottom row, not visible on scroll -->
-        <div class="mdl-layout__header-row">
-          <div class="mdl-layout-spacer"></div>
-          <!-- Navigation -->
-          <nav class="waterfall-demo-header-nav mdl-navigation">
-            <a class="mdl-navigation__link" href={% url "topic" 'has_death_penalty' %}>Dealth Penalty</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'is_illegal' %}>Legal Issues</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'has_employment_protection' %}>Employment Discrimination</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'has_hate_crime_protection' %}>Hate crimes</a>
-            <a class="mdl-navigation__link" href={% url "topic" 'has_marriage_recognition' %}>Marriage Recognition</a>
-          </nav>
-        </div>
-      </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Countries</span>
-        <nav class="mdl-navigation">
-          {% if countries %}
-            {% for country in countries %}
-              <a class="mdl-navigation__link" href={% url "country" country.country_name %}>{{ country.country_name }}</a>
-            {% endfor %}
-          {% else %}
-            <a class="mdl-navigation__link" href="">No countries found</a>
-          {% endif %}
-        </nav>
-      </div>
-      <main class="mdl-layout__content">
-        <div class="page-content">
-            <table class="pride-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-              <thead>
-                <tr>
-                  <th class="mdl-data-table__cell--non-numeric">LGBT Rights</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="mdl-data-table__cell--non-numeric">Death Penalty for homosexual acts</td>
-                    {% if country.has_death_penalty %}      
-                      <td>Yes</td>
-                    {% else %}
-                        <td>No</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                  <td class="mdl-data-table__cell--non-numeric">Homosexual acts are illegal</td>
-                  {% if country.is_illegal %}      
-                      <td>Yes</td>
-                    {% else %}
-                        <td>No</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                  <td class="mdl-data-table__cell--non-numeric">Has protection against discrimination in employment based on sexual orientation</td>
-                  {% if country.has_employment_protection %}      
-                      <td>Yes</td>
-                    {% else %}
-                        <td>No</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                  <td class="mdl-data-table__cell--non-numeric">Has protection against hate crime based on sexual orientation</td>
-                  {% if country.has_hate_crime_protection %}      
-                      <td>Yes</td>
-                    {% else %}
-                        <td>No</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                  <td class="mdl-data-table__cell--non-numeric">Marriage open for same sex couples</td>
-                  {% if country.has_marriage_recognition %}      
-                      <td>Yes</td>
-                    {% else %}
-                        <td>No</td>
-                    {% endif %}
-                </tr>
-              </tbody>
-            </table>
-        </div>
-      </main>
-    </div>
-    <script src="{% static 'js/material.js' %}"></script>
-  </body>
-</html>
+
+{% block title %}{{ country.country_name }}{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'country/country.css' %}">
+{% endblock %}
+
+{% block content %}
+  <table class="pride-table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">LGBT Rights</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Death Penalty for homosexual acts</td>
+        {% if country.has_death_penalty %}      
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Homosexual acts are illegal</td>
+        {% if country.is_illegal %}      
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Has protection against discrimination in employment based on sexual orientation</td>
+        {% if country.has_employment_protection %}      
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Has protection against hate crime based on sexual orientation</td>
+        {% if country.has_hate_crime_protection %}      
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Marriage open for same sex couples</td>
+        {% if country.has_marriage_recognition %}      
+          <td>Yes</td>
+        {% else %}
+          <td>No</td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

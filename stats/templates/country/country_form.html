@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if object %}
+  Edit Country
+{% else %}
+  Add Country
+{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'country/country_form.css' %}">
+{% endblock %}
+
+{% block content %}
+  {% if object %}
+    <h1>Edit Country Details</h1>
+  {% else %}
+    <h1>Create New Country</h1>
+  {% endif %}
+    {% crispy form %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
